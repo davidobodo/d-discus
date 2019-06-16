@@ -1,0 +1,73 @@
+warning: LF will be replaced by CRLF in src/index.js.
+The file will have its original line endings in your working directory
+[1mdiff --git a/src/components/dashboard/Dashboard.js b/src/components/dashboard/Dashboard.js[m
+[1mindex e98d191..c01ef73 100644[m
+[1m--- a/src/components/dashboard/Dashboard.js[m
+[1m+++ b/src/components/dashboard/Dashboard.js[m
+[36m@@ -2,6 +2,8 @@[m [mimport React, { Component } from 'react'[m
+ import Notifications from './Notifications'[m
+ import ProjectList from '../projects/ProjectList'[m
+ import { connect } from 'react-redux'[m
+[32m+[m[32mimport { firestoreConnect } from 'react-redux-firebase'[m
+[32m+[m[32mimport { compose } from 'redux'[m
+ [m
+ [m
+ class Dashboard extends Component {[m
+[36m@@ -34,4 +36,10 @@[m [mconst mapStateToProps = (state) => {[m
+ [m
+ [m
+ [m
+[31m-export default connect(mapStateToProps)(Dashboard)[m
+\ No newline at end of file[m
+[32m+[m[32mexport default compose([m
+[32m+[m	[32mconnect(mapStateToProps),[m
+[32m+[m	[32mfirestoreConnect([[m
+[32m+[m	[32m{collection: 'projects'}[m
+[32m+[m		[32m])[m
+[32m+[m[41m	[m
+[32m+[m[32m )(Dashboard)[m
+\ No newline at end of file[m
+[1mdiff --git a/src/index.js b/src/index.js[m
+[1mindex 87298de..53d3322 100644[m
+[1m--- a/src/index.js[m
+[1m+++ b/src/index.js[m
+[36m@@ -7,15 +7,15 @@[m [mimport { createStore, applyMiddleware, compose } from 'redux'[m
+ import rootReducer from './store/reducers/rootReducer'[m
+ import { Provider } from 'react-redux'[m
+ import thunk from 'redux-thunk'[m
+[31m-import { reduxFirestore, getFirestore } from 'redux-firestore'[m
+[31m-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'[m
+[32m+[m[32mimport { createFirestoreInstance, getFirestore } from 'redux-firestore'[m
+[32m+[m[32mimport { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'[m
+ import fbconfig from './config/fbconfig'[m
+ [m
+[31m-const store = createStore(rootReducer, [m
+[32m+[m[32mconst store = createStore(rootReducer,[m
+ 	compose([m
+ 	applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),[m
+[31m-	reduxFirestore(fbconfig),[m
+[31m-	reactReduxFirebase(fbconfig)[m
+[32m+[m	[32m// createFirestoreInstance(fbconfig),[m
+[32m+[m	[32m// ReactReduxFirebaseProvider(fbconfig)[m
+ 	)[m
+ 	);[m
+ [m
+[1mdiff --git a/src/store/reducers/rootReducer.js b/src/store/reducers/rootReducer.js[m
+[1mindex 81edb39..f791540 100644[m
+[1m--- a/src/store/reducers/rootReducer.js[m
+[1m+++ b/src/store/reducers/rootReducer.js[m
+[36m@@ -1,11 +1,13 @@[m
+ import authReducer from './authReducer'[m
+ import projectReducer from './projectReducer'[m
+ import { combineReducers } from 'redux'[m
+[32m+[m[32mimport { firestoreReducer } from 'redux-firestore'[m
+ [m
+ [m
+ const rootReducer = combineReducers({[m
+ 	auth: authReducer,[m
+ 	project: projectReducer,[m
+[32m+[m	[32mfirestore: firestoreReducer[m
+ });[m
+ [m
+ export default rootReducer[m
+\ No newline at end of file[m
