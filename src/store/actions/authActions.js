@@ -42,7 +42,7 @@ export const signUp = (newUser) =>{
 		}).then(()=>{
 			dispatch({type: 'SIGNUP_SUCCESS'});
 		}).catch((err) =>{
-			dispatch({typr:'SIGNUP_ERROR', err});
+			dispatch({type:'SIGNUP_ERROR', err});
 		});
 	}
 }
