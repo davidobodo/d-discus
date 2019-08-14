@@ -7,7 +7,7 @@ const commentReducer =(state=initState, action) => {
         case 'COMMENT':
             return{
                 ...state,
-                action : action.payload
+                comment : action.payload
             }
         default:
             return state

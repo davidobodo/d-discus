@@ -48,7 +48,7 @@ class ProjectDetails extends Component{
 	        </div>
 	      </div>
 		  <div className="comments card z-depth-0">
-			<ProjectComments comment={this.state.comment} changed={this.postComment} submit={this.submitPost}/>
+			<ProjectComments comment={this.state.comment} changed={this.postComment} submit={this.submitPost} comments={this.props.comments}/>
 				
 		  </div>
 	    </div>
@@ -78,7 +78,8 @@ const mapStateToProps = (state, ownProps) => {
 	const project = projects ? projects[id]: null
 	return{
 		project : project,
-		auth : state.firebase.auth
+		auth : state.firebase.auth,
+		comments : state.comments.comment
 	}
 }
 
