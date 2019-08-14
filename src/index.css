@@ -11,10 +11,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
    padding: 0;
   font-family: sans-serif;
-  background: url(/mario-bg.png) no-repeat;
+  background: url('https://images.unsplash.com/photo-1475116127127-e3ce09ee84e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80') no-repeat ;
   background-size: 100%;
   background-position: bottom;
-  background-color: #95e8f3;
   min-height: 100%;
 
 }

@@ -7,6 +7,7 @@ import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import ProjectComments from './ProjectComments'
+import {comment} from '../../store/actions/projectActions'
 
 class ProjectDetails extends Component{
 
@@ -24,7 +25,7 @@ class ProjectDetails extends Component{
 
 	submitPost = (e) => {
 		e.preventDefault()
-		console.log(this.state.content)
+		this.props.comment(this.state.content)
 
 	}
 	render(){
@@ -66,6 +67,7 @@ class ProjectDetails extends Component{
 
 
 const mapStateToProps = (state, ownProps) => {
+	console.log(state)
 	//ownProps got in here, because i am using ROUTE on this component
 
 	//get this page id
@@ -80,9 +82,15 @@ const mapStateToProps = (state, ownProps) => {
 	}
 }
 
+const mapDispatchToProps = dispatch => {
+	return{
+		comment : (mes)=> dispatch(comment(mes))
+	}
+}
+
 
 export default compose(
-	connect(mapStateToProps),
+	connect(mapStateToProps, mapDispatchToProps),
 	firestoreConnect([
 		{ collection : 'projects'}
 		])

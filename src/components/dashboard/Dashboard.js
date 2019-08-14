@@ -7,6 +7,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 //compose is for joining together the two higher order components present in this component
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
+import './Dashboard.css'
 
 class Dashboard extends Component {
 
@@ -18,7 +19,7 @@ class Dashboard extends Component {
 		if(!auth.uid) return <Redirect to='/signin'/>
 	
 		return(
-			<div className="container dashboard">
+			<div className="container dashboard dash">
 				<div className="row">
 					<div className=" col s12 m6">
 						<ProjectList projects={projects}/>
