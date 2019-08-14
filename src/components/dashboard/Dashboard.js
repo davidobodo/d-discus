@@ -8,6 +8,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import './Dashboard.css'
+import _ from 'lodash'
 
 class Dashboard extends Component {
 
@@ -22,7 +23,7 @@ class Dashboard extends Component {
 			<div className="container dashboard dash">
 				<div className="row">
 					<div className=" col s12 m6">
-						<ProjectList projects={projects}/>
+						<ProjectList projects={_.values(projects)}/>
 					</div>
 					<div className=" col s12 m5 offset-m1">
 						<Notifications notifications={notifications}/>

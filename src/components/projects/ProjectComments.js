@@ -7,6 +7,7 @@ const ProjectComments = (props) => {
     console.log(props.comments)
     return(
         <div className="comment">
+            <h6><strong>comments....</strong></h6>
            {props.comments.map(comment => (
                <Comment 
                 key={comment.id} 

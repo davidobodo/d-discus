@@ -4,7 +4,7 @@ import './Typing.css'
 const Typing =(props) => {
     let typing = null
     if(props.comment){
-        typing = <input className="myInput grey" onChange={props.changed}/>
+        typing = <input className="myInput" onChange={props.changed} placeholder="write a comment..."/>
     }
     return (
         <form onSubmit={props.submit}>

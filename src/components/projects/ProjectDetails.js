@@ -32,9 +32,8 @@ class ProjectDetails extends Component{
 	}
 	render(){
 	const { project,auth } = this.props;
-
+		console.log(this.props.comments, this.props.project)
 	if(!auth.uid) return <Redirect to='/signin'/>
-		console.log(this.state.comment)
 	if(project){
 	return(
 		<div className="container section project-details">
@@ -50,7 +49,7 @@ class ProjectDetails extends Component{
 	        </div>
 	      </div>
 		  <div className="comments card z-depth-0">
-			<ProjectComments comment={this.state.comment} changed={this.postComment} submit={this.submitPost} comments={_.values(this.props.comments["discuss1uid"])}/>		
+			<ProjectComments comment={this.state.comment} changed={this.postComment} submit={this.submitPost} comments={this.props.comments}/>		
 		  </div>
 	    </div>
 	)
@@ -69,7 +68,7 @@ class ProjectDetails extends Component{
 
 const mapStateToProps = (state, ownProps) => {
 	//ownProps got in here, because i am using ROUTE on this component
-
+	console.log(ownProps)
 	//get this page id
 	const id = ownProps.match.params.id;
 	//get all the projects from firestore project object
@@ -77,10 +76,11 @@ const mapStateToProps = (state, ownProps) => {
 	const projects = state.project;
 	//select the particular propertty in my firestore object that has this id and assign that to a const project
 	const project = projects ? projects[id]: null
+	console.log(state.comments[id])
 	return{
 		project : project,
 		auth : state.firebase.auth,
-		comments : state.comments
+		comments : state.comments[id]
 	}
 }
 

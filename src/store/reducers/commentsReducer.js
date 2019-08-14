@@ -1,21 +1,33 @@
 const initState ={
-    discuss1uid : [
-        {id: 1, comment: "first message"},
-        {id:2, comment:"second message"},
-        {id:3, comment: "third message"}
+    1111 : [
+        {number: 1, comment: "first message"},
+        {number:2, comment:"second message"},
+        {number:3, comment: "third message"}
+    ],
+
+    2222 : [
+        {number: 1, comment: "first message part 2"},
+        {number:2, comment:"second message part 2"},
+        {number:3, comment: "third message part 2"}
+    ],
+
+    3333 : [
+        {number: 1, comment: "first message part 3"},
+        {number:2, comment:"second message part 3"},
+        {number:3, comment: "third message part 3"}
     ]
 }
 
 const commentReducer =(state=initState, action) => {
     switch(action.type){
         case 'COMMENT':
+            // const comment = action.payload.mes
             return{
                 ...state
-                // discuss1uid : {
+                // initstate.discuss1uid : {
                 //     ...state,
-                //     { id :,
-                //     comment : action.payload
-                //     }
+                //     id : 4,
+                //     comment : comment
                 // }
             }
         default:

@@ -29,7 +29,6 @@ export const createProject = (project) =>{
 };
 
 export const comment = (mes) => {
-	console.log('i am reaching this')
 	return {
 		type: 'COMMENT',
 		payload : mes
