@@ -1,11 +1,17 @@
 import React from 'react'
 import Typing from '../Typing'
+import Comment from './Comment'
+import './ProjectComments.css'
 
 const ProjectComments = (props) => {
-    console.log(props)
+    console.log(props.comments)
     return(
-        <div>
-            <div>{props.comments}</div>
+        <div className="comment">
+           {props.comments.map(comment => (
+               <Comment 
+                key={comment.id} 
+                message={comment}/>
+           ))}
             <Typing comment={props.comment} changed={props.changed} submit={props.submit}/>
         </div>
     )
