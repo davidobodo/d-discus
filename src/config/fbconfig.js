@@ -1,5 +1,11 @@
+ //the app at the front of this import ensures that i import only the core functionality and not the whole firebase
+ //if i removed the /app from my import there would be a warning in my console.log
  import firebase from 'firebase/app';
+
+ //firestore is the database from firebase we will be using
  import 'firebase/firestore';
+
+ //i would be using firebase auth services to do all the authentication in this app
  import 'firebase/auth';
 
  // Your web app's Firebase configuration
@@ -17,6 +23,5 @@
   
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  firebase.firestore().settings({timestampsInSnapshots: true});
 
   export default firebase

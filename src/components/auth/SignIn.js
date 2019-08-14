@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+//higher order function for mapStateToProps and mapDispatchToProps
 import { connect } from 'react-redux'
 import { signIn } from '../../store/actions/authActions'
+//for guarding my route
 import { Redirect } from 'react-router-dom'
 
 class SignIn extends Component {
@@ -13,6 +15,7 @@ class SignIn extends Component {
 
 	handleChange = (e) => {
 		this.setState({
+			//e.target.id gets either password or email
 			[e.target.id] : e.target.value
 		})
 
@@ -20,11 +23,13 @@ class SignIn extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
+		//send the state into this action
 		this.props.signIn(this.state)
 	}
 
 	render(){
 		const { authError, auth } = this.props;
+		//if the uid property of the auth object in the firebase object exists take the user home
 		if(auth.uid) return <Redirect to='/'/>
 
 		return(
@@ -42,7 +47,7 @@ class SignIn extends Component {
 					<div className="input-field">
 						<button className="btn pink lighten-1 z-depth-0">Login</button>
 						<div className="red-text center">
-							{ authError ? <p>Loading Failed</p> : null}
+							{ authError ? <p>{authError}</p> : null}
 						</div>
 					</div>
 				</form>

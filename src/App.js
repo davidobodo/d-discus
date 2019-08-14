@@ -8,6 +8,9 @@ import SignUp from './components/auth/SignUp'
 import CreateProject from './components/projects/CreateProject'
 
 class App extends Component {
+	commentHandler = ()=> {
+		console.log('i can now comment')
+	}
   render(){
   return (
   	<BrowserRouter>
@@ -15,7 +18,7 @@ class App extends Component {
 		    <Navbar/>
 		    <Switch>
 		    	<Route exact path='/' component={Dashboard}/>
-		    	<Route path='/project/:id' component={ProjectDetails}/>
+		    	<Route path='/project/:id' component={ProjectDetails} clicked={this.commentHandler}/>
 		    	<Route path='/SignIn' component={SignIn}/>
 		    	<Route path='/SignUp' component={SignUp}/>
 		    	<Route path='/CreateProject' component={CreateProject}/>
@@ -25,5 +28,7 @@ class App extends Component {
  	 );
   }
 }
+
+
 
 export default App;
