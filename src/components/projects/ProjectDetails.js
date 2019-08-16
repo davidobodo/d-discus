@@ -11,7 +11,6 @@ import {comment} from '../../store/actions/projectActions'
 import _ from 'lodash'
 
 class ProjectDetails extends Component{
-
 	state = {
 		comment : false,
 		content : ''
@@ -26,13 +25,13 @@ class ProjectDetails extends Component{
 
 	submitPost = (e) => {
 		e.preventDefault()
-		this.props.comment(this.state.content)
+		this.props.comment(this.state.content, this.props.match.params.id)
 		this.setState({comment: false})
 
 	}
 	render(){
+
 	const { project,auth } = this.props;
-		console.log(this.props.comments, this.props.project)
 	if(!auth.uid) return <Redirect to='/signin'/>
 	if(project){
 	return(
@@ -44,12 +43,12 @@ class ProjectDetails extends Component{
 	        </div>
 	        <div className="card-action grey lighten-4 grey-text">
 	          <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
-	          {/* <div>{moment(project.createdAt.toDate().toString()).calendar()}</div> */}
+	          <div>{moment(project.createdAt.toDate().toString()).calendar()}</div>
 			  <button onClick={this.commentHandler}>Comment</button>
 	        </div>
 	      </div>
 		  <div className="comments card z-depth-0">
-			<ProjectComments comment={this.state.comment} changed={this.postComment} submit={this.submitPost} comments={this.props.comments}/>		
+			<ProjectComments comment={this.state.comment} changed={this.postComment} submit={this.submitPost} comments={_.values(this.props.comments)}/>		
 		  </div>
 	    </div>
 	)
@@ -68,15 +67,12 @@ class ProjectDetails extends Component{
 
 const mapStateToProps = (state, ownProps) => {
 	//ownProps got in here, because i am using ROUTE on this component
-	console.log(ownProps)
 	//get this page id
 	const id = ownProps.match.params.id;
 	//get all the projects from firestore project object
-	// const projects = state.firestore.data.projects;
-	const projects = state.project;
+	const projects = state.firestore.data.projects;
 	//select the particular propertty in my firestore object that has this id and assign that to a const project
 	const project = projects ? projects[id]: null
-	console.log(state.comments[id])
 	return{
 		project : project,
 		auth : state.firebase.auth,
@@ -86,7 +82,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
 	return{
-		comment : (mes)=> dispatch(comment(mes))
+		comment : (mes, id)=> dispatch(comment(mes, id))
 	}
 }
 

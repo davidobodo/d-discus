@@ -28,9 +28,20 @@ export const createProject = (project) =>{
 	}
 };
 
-export const comment = (mes) => {
-	return {
-		type: 'COMMENT',
-		payload : mes
+export const comment = (mes, id) => {
+	console.log("i am getting to thunk", id)
+	return (dispatch,getState, {getFirestore}) => {
+
+		const firestore = getFirestore();
+		console.log(firestore.collection)
+		firestore.collection('comments').doc(id).set({
+			comment : mes
+		}).then(()=>{
+			console.log("successsss")
+			dispatch({type: 'COMMENT'})
+		}).catch((err)=>{
+			dispatch({type: 'COMMENT_ERROR', err})
+		})
+		console.log("im here")
 	}
 }

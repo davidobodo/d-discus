@@ -37,8 +37,7 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
 	return {
 		//the projects can actually be seen in both the ordered object and data object in firestore but i chose the ordered object because it has numbers, so its kind of arranged(i need my projects to be arranged)
-		// projects : state.firestore.ordered.projects,
-		projects : state.project,
+		projects : state.firestore.ordered.projects,
 		auth : state.firebase.auth,
 		//notifications are also seen inside my firestore ordered object
 		notifications: state.firestore.ordered.notifications

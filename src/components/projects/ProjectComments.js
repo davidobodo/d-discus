@@ -4,7 +4,6 @@ import Comment from './Comment'
 import './ProjectComments.css'
 
 const ProjectComments = (props) => {
-    console.log(props.comments)
     return(
         <div className="comment">
             <h6><strong>comments....</strong></h6>
